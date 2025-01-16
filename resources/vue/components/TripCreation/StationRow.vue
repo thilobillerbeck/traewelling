@@ -17,6 +17,15 @@ export default {
     departure: {
       type: Boolean,
       default: true
+    },
+    removalFunction: {
+      type: Function,
+      default: () => {
+      }
+    },
+    key: {
+      type: String,
+      default: undefined
     }
   },
   emits: ['update:station', 'update:timeFieldA', 'update:timeFieldB'],
@@ -112,7 +121,7 @@ export default {
   </FullScreenModal>
 
   <!-- Station Input -->
-  <div class="flex-grow-1">
+  <div class="flex-grow-1 w-100">
     <div class="form-floating">
       <input
           v-model="stationInput"
@@ -125,7 +134,7 @@ export default {
   </div>
 
   <!-- Time Fields -->
-  <div class="flex-grow-2 flex-md-grow-0 flex-fill" v-if="departure && arrival" :class="departure && arrival ? 'col-md-4' : 'col-4'">
+  <div class="flex-grow-2 flex-md-grow-0 col-4 flex-fill" v-if="departure && arrival">
     <div class="form-floating">
       <input
           :id="timeFieldAId"
@@ -139,7 +148,7 @@ export default {
     </div>
   </div>
 
-  <div :class="departure && arrival ? 'col-md-4 flex-grow-2 flex-md-grow-0 flex-fill' : 'col-4 flex-grow-2 flex-md-grow-0 flex-fill'">
+  <div class="col-4 flex-grow-2 flex-md-grow-0 flex-fill">
     <div class="form-floating">
       <input
           :id="timeFieldBId"
@@ -152,4 +161,10 @@ export default {
       <label :for="timeFieldBId" class="form-label">{{ timeFieldBLabel }}</label>
     </div>
   </div>
+  <button v-if="departure && arrival" type="button" class="btn btn-danger btn-sm flex-grow-1 flex-md-grow-0"
+    @click="removalFunction(key)"
+    style="height: calc(3.5rem);"
+    >
+      <i class="fa fa-trash" aria-hidden="true"></i>
+  </button>
 </template>

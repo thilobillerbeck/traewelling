@@ -215,22 +215,18 @@ export default {
         <a href="#" @click="addStopover">{{ trans("trip_creation.form.add_stopover") }}
           <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
-        <div class="d-flex flex-row flex-wrap flex-md-nowrap gap-3 mt-1" v-for="(stopover, key) in stopovers" :key="key">
-            <StationRow
-                  :placeholder="trans('trip_creation.form.stopover')"
-                  v-on:update:station="setStopoverStation($event, key)"
-                  v-on:update:timeFieldB="setStopoverDeparture($event, key)"
-                  v-on:update:timeFieldA="setStopoverArrival($event, key)"
-            ></StationRow>
-
-              <button type="button" class="btn btn-danger btn-sm flex-grow-1 flex-md-grow-0"
-                      @click="removeStopover(key)"
-                      style="height: calc(3.5rem);"
-              >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
+        <div class="row g-3 g-md-3 mt-0" :class="{'mb-4 mb-md-3': stopovers.length > 0, 'mb-3': stopovers.length === 0}">
+          <div class="d-flex flex-row flex-wrap flex-md-nowrap gap-3" v-for="(stopover, key) in stopovers" :key="key">
+              <StationRow
+                    :placeholder="trans('trip_creation.form.stopover')"
+                    :removalFunction="removeStopover"
+                    v-on:update:station="setStopoverStation($event, key)"
+                    v-on:update:timeFieldB="setStopoverDeparture($event, key)"
+                    v-on:update:timeFieldA="setStopoverArrival($event, key)"
+              ></StationRow>
+          </div>
         </div>
-        <div class="row g-3 mt-1">
+        <div class="row g-3 mb-3">
           <div class="d-flex gap-3 align-items-center w-100">
             <StationRow
                 :placeholder="trans('trip_creation.form.destination')"
@@ -240,7 +236,7 @@ export default {
             ></StationRow>
           </div>
         </div>
-        <div class="row g-3 mt-1">
+        <div class="row g-3">
           <div class="col-12 col-md-3">
             <div class="form-floating">
               <input type="text" class="form-control mobile-input-fs-16"
