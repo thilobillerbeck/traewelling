@@ -112,7 +112,7 @@ export default {
   </FullScreenModal>
 
   <!-- Station Input -->
-  <div class="flex-grow-1 me-2">
+  <div class="flex-grow-1">
     <div class="form-floating">
       <input
           v-model="stationInput"
@@ -125,7 +125,7 @@ export default {
   </div>
 
   <!-- Time Fields -->
-  <div class="me-2" v-if="departure && arrival" :class="departure && arrival ? 'col-md-4' : 'col-4'">
+  <div class="flex-grow-2 flex-md-grow-0 flex-fill" v-if="departure && arrival" :class="departure && arrival ? 'col-md-4' : 'col-4'">
     <div class="form-floating">
       <input
           :id="timeFieldAId"
@@ -139,7 +139,7 @@ export default {
     </div>
   </div>
 
-  <div :class="departure && arrival ? 'col-md-4' : 'col-4'">
+  <div :class="departure && arrival ? 'col-md-4 flex-grow-2 flex-md-grow-0 flex-fill' : 'col-4 flex-grow-2 flex-md-grow-0 flex-fill'">
     <div class="form-floating">
       <input
           :id="timeFieldBId"

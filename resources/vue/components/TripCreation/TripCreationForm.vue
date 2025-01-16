@@ -203,7 +203,7 @@ export default {
     <div class="card mb-3">
       <form @submit.prevent="sendForm" class="card-body">
         <div class="row g-3 mb-3">
-          <div class="d-flex align-items-center w-100">
+          <div class="d-flex gap-3 align-items-center w-100">
             <StationRow
                 :placeholder="trans('trip_creation.form.origin')"
                 :arrival="false"
@@ -215,28 +215,23 @@ export default {
         <a href="#" @click="addStopover">{{ trans("trip_creation.form.add_stopover") }}
           <i class="fa fa-plus" aria-hidden="true"></i>
         </a>
-        <div class="row g-3 mt-1" v-for="(stopover, key) in stopovers" :key="key">
-          <div class="d-flex align-items-center w-100">
-            <div class="flex-grow-1 d-flex">
-              <StationRow
+        <div class="d-flex flex-row flex-wrap flex-md-nowrap gap-3 mt-1" v-for="(stopover, key) in stopovers" :key="key">
+            <StationRow
                   :placeholder="trans('trip_creation.form.stopover')"
                   v-on:update:station="setStopoverStation($event, key)"
                   v-on:update:timeFieldB="setStopoverDeparture($event, key)"
                   v-on:update:timeFieldA="setStopoverArrival($event, key)"
-              ></StationRow>
+            ></StationRow>
 
-              <button type="button" class="btn btn-danger btn-sm ms-3"
+              <button type="button" class="btn btn-danger btn-sm flex-grow-1 flex-md-grow-0"
                       @click="removeStopover(key)"
                       style="height: calc(3.5rem);"
               >
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
-            </div>
-          </div>
-          <hr class="my-2">
         </div>
         <div class="row g-3 mt-1">
-          <div class="d-flex align-items-center w-100">
+          <div class="d-flex gap-3 align-items-center w-100">
             <StationRow
                 :placeholder="trans('trip_creation.form.destination')"
                 :departure="false"
